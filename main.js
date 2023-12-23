@@ -29,8 +29,19 @@ hitButton.style.display = 'none';
 stayButton.style.display = 'none';
 showStatus();
 
+// Clears the cards of the screen.
+function clearCards() {
+    for (let i = 1; i <= 5; i++) {
+        let card = document.getElementById("card_" + i);
+
+        card.src = "";
+    }
+}
+
 // Event listener is created to make the buttons visible and change the text
 newGameButton.addEventListener('click', function () {
+    clearCards();
+
     gameStarted = true;
     gameOver = false;
     playerWon = false;
@@ -206,16 +217,6 @@ function checkForEndOfGame() {
 
 let cardsDir = "./cards/";
 let cardExtension = ".png";
-
-// let i = 0;
-
-// function nextCard() {
-//     i++;
-
-//     let card = document.getElementById("card_" + i);
-
-//     card.src = cardsDir + getCardString() + cardExtension;
-// }
 
 // A function is created to display the status of the game
 function showStatus() {
