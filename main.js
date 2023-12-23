@@ -1,13 +1,12 @@
 /**
  * Blackjack
- * 11/08/2019
  **/
 
 // Card variables
 // Creates an array of suits of cards in a global variable
-let suits = ['Hearts', 'Clubs', 'Diamonds', 'Spades'],
+let suits = ['hearts', 'clubs', 'diamonds', 'spades'],
     // Creates an array of different card values in a global variable
-    values = ['Ace', 'King', 'Queen', 'Jack', 'Ten', 'Nine', 'Eight', 'Seven', 'Six', 'Five', 'Four', 'Three', 'Two'];
+    values = ['a', 'k', 'q', 'j', '10', '9', '8', '7', '6', '5', '4', '3', '2'];
 
 // DOM variables
 let textArea = document.getElementById('text-area'),
@@ -31,7 +30,7 @@ stayButton.style.display = 'none';
 showStatus();
 
 // Event listener is created to make the buttons visible and change the text
-newGameButton.addEventListener('click', function() {
+newGameButton.addEventListener('click', function () {
     gameStarted = true;
     gameOver = false;
     playerWon = false;
@@ -50,16 +49,18 @@ newGameButton.addEventListener('click', function() {
 });
 
 // Event listener is created to add cards
-hitButton.addEventListener('click', function() {
+hitButton.addEventListener('click', function () {
     // A new card will be pushed into the player's deck
     playerCards.push(getNextCard());
     checkForEndOfGame();
     // Text area is updated
     showStatus();
+
+    nextCard();
 });
 
 // Event listener is created to stay with the current cards
-stayButton.addEventListener('click', function() {
+stayButton.addEventListener('click', function () {
     gameOver = true;
     checkForEndOfGame();
     // Text area is updated
@@ -103,7 +104,7 @@ function shuffleDeck(deck) {
 
 // A function is created to concatenate the card value with its suit
 function getCardString(card) {
-    return card.value + ' of ' + card.suit;
+    return card.value + "-" + card.suit;
 };
 
 // A function is created to provide a card to the player
@@ -113,7 +114,7 @@ function getNextCard() {
 
 // A function is created to match cards with their numeric values
 function getCardNumericValue(card) {
-    switch(card.value) {
+    switch (card.value) {
         case 'Ace':
             return 1;
         case 'Two':
@@ -174,7 +175,7 @@ function checkForEndOfGame() {
 
     if (gameOver) {
         // Checks if the dealer and player has less than or equal score to 21
-        while(dealerScore < playerScore && playerScore <= 21 && dealerScore <= 21) {
+        while (dealerScore < playerScore && playerScore <= 21 && dealerScore <= 21) {
             // Let dealer take cards
             dealerCards.push(getNextCard());
             // Functionality for dealer to win if he/she has 5 cards
@@ -203,6 +204,19 @@ function checkForEndOfGame() {
     };
 };
 
+let cardsDir = "./cards/";
+let cardExtension = ".png";
+
+// let i = 0;
+
+// function nextCard() {
+//     i++;
+
+//     let card = document.getElementById("card_" + i);
+
+//     card.src = cardsDir + getCardString() + cardExtension;
+// }
+
 // A function is created to display the status of the game
 function showStatus() {
     // Text is displayed when the game is not started
@@ -213,7 +227,7 @@ function showStatus() {
     // Dealer's cards prepared to displayed
     let dealerCardString = '';
     // Iterates through the deck of cards
-    for (let i = 0; i <dealerCards.length; i++) {
+    for (let i = 0; i < dealerCards.length; i++) {
         // Uses a function to join the value with the suit and display it on new line
         dealerCardString += getCardString(dealerCards[i]) + '\n';
     };
@@ -224,13 +238,19 @@ function showStatus() {
     for (let i = 0; i < playerCards.length; i++) {
         // Uses a function to join the value with the suit and display it on new line
         playerCardString += getCardString(playerCards[i]) + '\n';
+
+        // console.log(getCardString(playerCards[i]));
+        let card = document.getElementById("card_" + (i+1));
+
+        let cardSrc = cardsDir + getCardString(playerCards[i]) + cardExtension;
+        card.src = cardSrc;
     };
 
     updateScores();
 
     // Player's and dealer's cards and scores are displayed to the interface
     textArea.innerText = 'dealer has: \n' + dealerCardString + '(score: ' + dealerScore + ')\n\n' +
-                         'Player has: \n' + playerCardString + '(score: ' + playerScore + ')\n\n';
+        'Player has: \n' + playerCardString + '(score: ' + playerScore + ')\n\n';
 
     // Checks if the game is over
     if (gameOver) {
