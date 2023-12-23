@@ -115,23 +115,23 @@ function getNextCard() {
 // A function is created to match cards with their numeric values
 function getCardNumericValue(card) {
     switch (card.value) {
-        case 'Ace':
+        case 'a':
             return 1;
-        case 'Two':
+        case '2':
             return 2;
-        case 'Three':
+        case '3':
             return 3;
-        case 'Four':
+        case '4':
             return 4;
-        case 'Five':
+        case '5':
             return 5;
-        case 'Six':
+        case '6':
             return 6;
-        case 'Seven':
+        case '7':
             return 7;
-        case 'Eight':
+        case '8':
             return 8;
-        case 'Nine':
+        case '9':
             return 9;
         default:
             return 10;
