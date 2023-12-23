@@ -9,11 +9,27 @@
         <h4>By Rafal Zacher</h4>
         <br>
 
-        <p id="text-area">Welcome to Blackjack!</p>
+        <!-- <p id="text-area">Welcome to Blackjack!</p>
         <button id="new-game-button">New Game!</button>
         <button id="hit-button">Hit!</button>
         <button id="stay-button">Stay</button>
 
-        <script src="main.js"></script>
+        <script src="main.js"></script> -->
+
+        <img id="card" src="" style="width: 180px;">
     </body>
+
+    <script>
+        let cardsDir = "./cards/";
+        let cardExtension = ".png";
+        let pathToCards = [cardsDir + "back.png"];
+
+        for(let i = 1; i<=54; i++) {
+            pathToCards.push(cardsDir + i + cardExtension);
+        }
+
+        let card = document.getElementById("card");
+
+        card.src = pathToCards[2];
+    </script>
 </html>
